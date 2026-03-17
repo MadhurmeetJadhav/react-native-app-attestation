@@ -1,0 +1,49 @@
+{
+  "name": "react-native-app-attestation",
+  "version": "0.1.0",
+  "description": "Mobile app attestation for React Native — Android Play Integrity & iOS App Attest",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "react-native-app-attestation.podspec",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react-native",
+    "attestation",
+    "play-integrity",
+    "app-attest",
+    "security",
+    "android",
+    "ios"
+  ],
+  "author": "Madhurmeet Jadhav",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madhurmeetjadhav/react-native-app-attestation"
+  },
+  "codegenConfig": {
+    "name": "ReactNativeAppAttestation",
+    "type": "all",
+    "jsSrcsDir": "src"
+  },
+  "react-native": "src/index.ts",
+  "source": "src/index.ts",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/react-native": "^0.72.0"
+  }
+}
