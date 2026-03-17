@@ -1,22 +1,26 @@
-buildscript {
-  repositories {
-    google()
-    mavenCentral()
-  }
-  dependencies {
-    classpath "com.android.tools.build:gradle:7.4.2"
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
-  }
-}
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
+def safeExtGet(prop, fallback) {
+  return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 android {
-  compileSdkVersion 33
+  compileSdkVersion safeExtGet("compileSdkVersion", 34)
+  namespace "com.reactnativeappattestation"
+
   defaultConfig {
-    minSdkVersion 24
-    targetSdkVersion 33
+    minSdkVersion safeExtGet("minSdkVersion", 21)
+    targetSdkVersion safeExtGet("targetSdkVersion", 34)
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = "1.8"
   }
 }
 
@@ -26,6 +30,12 @@ repositories {
 }
 
 dependencies {
-  implementation "com.facebook.react:react-native:+"
+  // Provided by the host app / React Native Gradle plugin
+  implementation "com.facebook.react:react-android"
   implementation "com.google.android.play:integrity:1.3.0"
+
+  def kotlinVersion = safeExtGet("kotlinVersion", null)
+  if (kotlinVersion != null) {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  }
 }

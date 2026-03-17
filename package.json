@@ -36,7 +36,6 @@
     "type": "all",
     "jsSrcsDir": "src"
   },
-  "react-native": "src/index.ts",
   "source": "src/index.ts",
   "peerDependencies": {
     "react": "*",
