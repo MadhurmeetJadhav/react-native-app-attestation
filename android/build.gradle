@@ -5,12 +5,6 @@ def safeExtGet(prop, fallback) {
   return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
-def javaVersion = safeExtGet("javaVersion", JavaVersion.VERSION_17)
-def kotlinJvmTarget = safeExtGet(
-  "kotlinJvmTarget",
-  javaVersion == JavaVersion.VERSION_1_8 ? "1.8" : "17"
-)
-
 android {
   compileSdkVersion safeExtGet("compileSdkVersion", 34)
   namespace "com.reactnativeappattestation"
@@ -21,12 +15,12 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility javaVersion
-    targetCompatibility javaVersion
+    sourceCompatibility safeExtGet("javaVersion", JavaVersion.VERSION_17)
+    targetCompatibility safeExtGet("javaVersion", JavaVersion.VERSION_17)
   }
 
   kotlinOptions {
-    jvmTarget = kotlinJvmTarget
+    jvmTarget = safeExtGet("kotlinJvmTarget", "17")
   }
 }
 
@@ -36,7 +30,6 @@ repositories {
 }
 
 dependencies {
-  // Provided by the host app / React Native Gradle plugin
   implementation "com.facebook.react:react-android"
   implementation "com.google.android.play:integrity:1.3.0"
 
