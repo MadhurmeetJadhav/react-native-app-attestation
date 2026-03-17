@@ -5,6 +5,12 @@ def safeExtGet(prop, fallback) {
   return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
+def javaVersion = safeExtGet("javaVersion", JavaVersion.VERSION_17)
+def kotlinJvmTarget = safeExtGet(
+  "kotlinJvmTarget",
+  javaVersion == JavaVersion.VERSION_1_8 ? "1.8" : "17"
+)
+
 android {
   compileSdkVersion safeExtGet("compileSdkVersion", 34)
   namespace "com.reactnativeappattestation"
@@ -15,12 +21,12 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility javaVersion
+    targetCompatibility javaVersion
   }
 
   kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = kotlinJvmTarget
   }
 }
 
